@@ -6,8 +6,12 @@
 #include "rgb.h"
 class Image {
     public:
-        Image(int width, int height);
-        ~Image();
+        Image(int width, int height) : width(width), height(height) {
+            data = new RGB[width*height];
+        };
+        ~Image() {
+            delete[] data;
+        };
 
         int getWidth() const {
             return width;
@@ -17,11 +21,11 @@ class Image {
         };
 
         RGB getPixel(int i, int j) const {
-            (*this)->checkIndex(i, j);
+            this->checkIndex(i, j);
             return data[i + j*width];
         };
         void setPixel(int i, int j, const RGB& col) {
-            (*this)->checkIndex(i, j);
+            this->checkIndex(i, j);
             data[i + j*width] = col;
         };
 
