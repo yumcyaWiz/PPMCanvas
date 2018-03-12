@@ -1,8 +1,8 @@
-#include "ppm_drawer.h"
+#include "ppm_canvas.h"
 
 
 int main() {
-    Image img(512, 512);
-    img.drawTriangle(Vec2f(0, 0), Vec2f(100, 100), Vec2f(50, 10), RGB(0, 255, 0));
-    img.ppm_output("output.ppm");
+    Canvas cv(512, 512);
+    cv.drawTriangle(Vec2f(0, 0), Vec2f(100, 100), Vec2f(50, 10), RGB(0, 255, 0));
+    cv.ppm_output("output.ppm");
 };

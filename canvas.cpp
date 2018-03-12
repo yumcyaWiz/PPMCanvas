@@ -1,4 +1,4 @@
-#include "image.h"
+#include "canvas.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -6,7 +6,7 @@
 #include "util.h"
 
 
-void Image::ppm_output(const std::string& filename) const {
+void Canvas::ppm_output(const std::string& filename) const {
     std::ofstream file(filename.c_str());
     
     int width = this->width;
@@ -27,7 +27,7 @@ void Image::ppm_output(const std::string& filename) const {
 }
 
 
-void Image::drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
+void Canvas::drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
     int sx = (int)p1.x;
     int sy = (int)p1.y;
     int ex = (int)p2.x;
@@ -50,7 +50,7 @@ void Image::drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
         }
     }
 }
-void Image::drawCircle(const Vec2f& p, float r, const RGB& col) {
+void Canvas::drawCircle(const Vec2f& p, float r, const RGB& col) {
     int cx = (int)p.x;
     int cy = (int)p.y;
 
@@ -71,7 +71,7 @@ void Image::drawCircle(const Vec2f& p, float r, const RGB& col) {
         }
     }
 }
-void Image::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
+void Canvas::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
     int sx = (int)p1.x;
     int sy = (int)p1.y;
     int ex = (int)p2.x;
@@ -86,7 +86,7 @@ void Image::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
         }
     }
 }
-void Image::drawTriangle(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
+void Canvas::drawTriangle(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
     this->drawLine(p1, p2, col);
     this->drawLine(p2, p3, col);
     this->drawLine(p3, p1, col);

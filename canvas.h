@@ -1,16 +1,16 @@
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef CANVAS_H
+#define CANVAS_H
 #include <iostream>
 #include <cstdlib>
 #include <string>
 #include "vec2.h"
 #include "rgb.h"
-class Image {
+class Canvas {
     public:
-        Image(int width, int height) : width(width), height(height) {
+        Canvas(int width, int height) : width(width), height(height) {
             data = new RGB[width*height];
         };
-        ~Image() {
+        ~Canvas() {
             delete[] data;
         };
 
