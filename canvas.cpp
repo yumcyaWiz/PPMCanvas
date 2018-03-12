@@ -28,26 +28,14 @@ void Canvas::ppm_output(const std::string& filename) const {
 
 
 void Canvas::drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
-    int sx = (int)p1.x;
-    int sy = (int)p1.y;
-    int ex = (int)p2.x;
-    int ey = (int)p2.y;
+    this->checkIndex(p1.x, p1.y);
+    this->checkIndex(p2.x, p2.y);
 
-    this->checkIndex(sx, sy);
-    this->checkIndex(ex, ey);
-
-    float slope = (p2.y - p1.y)/(p2.x - p1.x);
-    if(sx < ex) {
-        for(int px = sx; px <= ex; px++) {
-            float py = sy + slope*(px - sx); 
-            this->setPixel(px, (int)py, col);
-        }
-    }
-    else {
-        for(int px = ex; px <= sx; px++) {
-            float py = sy + slope*(px - sx); 
-            this->setPixel(px, (int)py, col);
-        }
+    Vec2f direction = normalize(p2 - p1);
+    float dist = (p2 - p1).length();
+    for(float t = 0; t <= dist; t++) {
+        Vec2f p = p1 + t*direction;
+        this->setPixel((int)p.x, (int)p.y, col);
     }
 }
 void Canvas::drawCircle(const Vec2f& p, float r, const RGB& col) {
@@ -86,7 +74,16 @@ void Canvas::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
         }
     }
 }
-void Canvas::drawTriangle(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
+void Canvas::drawRectOutline(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
+    int sx = (int)p1.x;
+    int sy = (int)p1.y;
+    int ex = (int)p2.x;
+    int ey = (int)p2.y;
+    
+    this->checkIndex(sx, sy);
+    this->checkIndex(ex, ey);
+}
+void Canvas::drawTriangleOutline(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
     this->drawLine(p1, p2, col);
     this->drawLine(p2, p3, col);
     this->drawLine(p3, p1, col);

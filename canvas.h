@@ -35,8 +35,11 @@ class Canvas {
 
         void drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col);
         void drawCircle(const Vec2f& center, float radius, const RGB& col);
+        void drawCircleOutline(const Vec2f& center, float radius, const RGB& col);
         void drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col);
+        void drawRectOutline(const Vec2f& p1, const Vec2f& p2, const RGB& col);
         void drawTriangle(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col);
+        void drawTriangleOutline(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col);
 
 
     private:

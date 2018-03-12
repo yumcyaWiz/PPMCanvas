@@ -11,7 +11,7 @@ class Vec2 {
         Vec2(T x) :x(x), y(x) {};
         Vec2(T x, T y) : x(x), y(y) {};
 
-        float length() const {
+        T length() const {
             return std::sqrt(x*x + y*y);
         };
         T length2() const {
@@ -52,6 +52,10 @@ template <typename T>
 inline const Vec2<T> operator*(const Vec2<T>& v1, T k) {
     return Vec2<T>(v1.x * k, v1.y * k);
 }
+template <typename T>
+inline const Vec2<T> operator*(T k, const Vec2<T>& v2) {
+    return v2 * k;
+}
 
 template <typename T>
 inline const Vec2<T> operator/(const Vec2<T>& v1, const Vec2<T>& v2) {
@@ -64,6 +68,12 @@ inline const Vec2<T> operator/(const Vec2<T>& v1, T k) {
 template <typename T>
 inline const Vec2<T> operator/(T k, const Vec2<T>& v2) {
     return Vec2<T>(k / v2.x, k / v2.y);
+}
+
+
+template <typename T>
+inline Vec2<T> normalize(const Vec2<T>& v) {
+    return v/v.length();
 }
 
 
