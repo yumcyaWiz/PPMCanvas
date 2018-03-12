@@ -48,7 +48,7 @@ class Canvas {
         RGB* data;
 
         void checkIndex(int i, int j) const {
-            if(i < 0 || i > width || j < 0 || j > height) {
+            if(i < 0 || i >= width || j < 0 || j >= height) {
                 std::cerr << "Invalid Index" << std::endl;
                 std::exit(1);
             };
