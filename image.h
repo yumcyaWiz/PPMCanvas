@@ -32,6 +32,11 @@ class Image {
         void ppm_output(const std::string& filename) const;
 
 
+        void drawLine(float x1, float y1, float x2, float y2, const RGB& col);
+        void drawCircle(float x, float y, float radius, const RGB& col);
+        void drawRect(float x1, float y1, float x2, float y2, const RGB& col);
+
+
     private:
         int width;
         int height;
