@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include "vec2.h"
 #include "rgb.h"
 class Image {
     public:
@@ -32,9 +33,9 @@ class Image {
         void ppm_output(const std::string& filename) const;
 
 
-        void drawLine(float x1, float y1, float x2, float y2, const RGB& col);
-        void drawCircle(float x, float y, float radius, const RGB& col);
-        void drawRect(float x1, float y1, float x2, float y2, const RGB& col);
+        void drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col);
+        void drawCircle(const Vec2f& center, float radius, const RGB& col);
+        void drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col);
 
 
     private:

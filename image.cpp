@@ -27,24 +27,24 @@ void Image::ppm_output(const std::string& filename) const {
 }
 
 
-void Image::drawLine(float x1, float y1, float x2, float y2, const RGB& col) {
-    int sx = (int)x1;
-    int sy = (int)y1;
-    int ex = (int)x2;
-    int ey = (int)y2;
+void Image::drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
+    int sx = (int)p1.x;
+    int sy = (int)p1.y;
+    int ex = (int)p2.x;
+    int ey = (int)p2.y;
 
     this->checkIndex(sx, sy);
     this->checkIndex(ex, ey);
 
-    float slope = (y2 - y1)/(x2 - x1);
+    float slope = (p2.y - p1.y)/(p2.x - p1.x);
     for(int px = sx; px <= ex; px++) {
         float py = sy + slope*(px - sx); 
         this->setPixel(px, (int)py, col);
     }
 }
-void Image::drawCircle(float x, float y, float r, const RGB& col) {
-    int cx = (int)x;
-    int cy = (int)y;
+void Image::drawCircle(const Vec2f& p, float r, const RGB& col) {
+    int cx = (int)p.x;
+    int cy = (int)p.y;
 
     for(int i = -r; i <= r; i++) {
         int px = cx + i;
@@ -63,11 +63,11 @@ void Image::drawCircle(float x, float y, float r, const RGB& col) {
         }
     }
 }
-void Image::drawRect(float x1, float y1, float x2, float y2, const RGB& col) {
-    int sx = (int)x1;
-    int sy = (int)y1;
-    int ex = (int)x2;
-    int ey = (int)y2;
+void Image::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
+    int sx = (int)p1.x;
+    int sy = (int)p1.y;
+    int ex = (int)p2.x;
+    int ey = (int)p2.y;
 
     this->checkIndex(sx, sy);
     this->checkIndex(ex, ey);
