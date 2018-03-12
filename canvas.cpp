@@ -82,6 +82,13 @@ void Canvas::drawRectOutline(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
     
     this->checkIndex(sx, sy);
     this->checkIndex(ex, ey);
+
+    Vec2f p3(p1.x, p2.y), p4(p2.x, p1.y);
+
+    this->drawLine(p1, p3, col);
+    this->drawLine(p3, p2, col);
+    this->drawLine(p2, p4, col);
+    this->drawLine(p4, p1, col);
 }
 void Canvas::drawTriangleOutline(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
     this->drawLine(p1, p2, col);
