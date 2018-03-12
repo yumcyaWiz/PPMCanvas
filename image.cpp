@@ -37,9 +37,17 @@ void Image::drawLine(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
     this->checkIndex(ex, ey);
 
     float slope = (p2.y - p1.y)/(p2.x - p1.x);
-    for(int px = sx; px <= ex; px++) {
-        float py = sy + slope*(px - sx); 
-        this->setPixel(px, (int)py, col);
+    if(sx < ex) {
+        for(int px = sx; px <= ex; px++) {
+            float py = sy + slope*(px - sx); 
+            this->setPixel(px, (int)py, col);
+        }
+    }
+    else {
+        for(int px = ex; px <= sx; px++) {
+            float py = sy + slope*(px - sx); 
+            this->setPixel(px, (int)py, col);
+        }
     }
 }
 void Image::drawCircle(const Vec2f& p, float r, const RGB& col) {
@@ -77,4 +85,9 @@ void Image::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
             this->setPixel(i, j, col);
         }
     }
+}
+void Image::drawTriangle(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
+    this->drawLine(p1, p2, col);
+    this->drawLine(p2, p3, col);
+    this->drawLine(p3, p1, col);
 }
