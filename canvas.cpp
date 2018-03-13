@@ -105,6 +105,32 @@ void Canvas::drawRectOutline(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
     this->drawLine(p4, p1, col);
 }
 
+void Canvas::drawTriangle(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
+    int sx = (int)std::min(p1.x, std::min(p2.x, p3.x));
+    int sy = (int)std::min(p1.y, std::min(p2.y, p3.y));
+    int ex = (int)std::max(p1.x, std::max(p2.x, p3.x));
+    int ey = (int)std::max(p1.y, std::max(p2.y, p3.y));
+
+    Vec2f p1p2 = p2 - p1;
+    Vec2f p2p3 = p3 - p2;
+    Vec2f p3p1 = p1 - p3;
+    for(int px = sx; px <= ex; px++) {
+        for(int py = sy; py <= ey; py++) {
+            if(px < 0 || px >= this->width || py < 0 || py >= this->height)
+                continue;
+
+            Vec2f p0(px, py);
+            Vec2f p1p0 = p1 - p0;
+            Vec2f p2p0 = p2 - p0;
+            Vec2f p3p0 = p3 - p0;
+
+            if(!(cross(p1p2, p1p0) < 0 && cross(p2p3, p2p0) < 0 && cross(p3p1, p3p0) < 0))
+                continue;
+
+            this->setPixel(px, py, col);
+        }
+    }
+}
 void Canvas::drawTriangleOutline(const Vec2f& p1, const Vec2f& p2, const Vec2f& p3, const RGB& col) {
     this->drawLine(p1, p2, col);
     this->drawLine(p2, p3, col);

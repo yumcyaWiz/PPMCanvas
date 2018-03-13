@@ -81,6 +81,10 @@ template <typename T>
 inline T dot(const Vec2<T>& v1, const Vec2<T>& v2) {
     return v1.x*v2.x + v1.y*v2.y;
 }
+template <typename T>
+inline T cross(const Vec2<T>& v1, const Vec2<T>& v2) {
+    return v1.x*v2.y - v1.y*v2.x;
+}
 
 
 typedef Vec2<double> Vec2d;
