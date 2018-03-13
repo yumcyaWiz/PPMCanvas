@@ -73,6 +73,25 @@ void Canvas::drawCircleOutline(const Vec2f& p, float r, const RGB& col) {
     }
 }
 
+void Canvas::drawEllipse(const Vec2f& center, float rx, float ry, const RGB& col) {
+    int cx = (int)center.x;
+    int cy = (int)center.y;
+
+    for(int px = cx - rx; px <= cx + rx; px++) {
+        if(px < 0 || px >= this->width)
+            continue;
+        for(int py = cy - ry; py <= cy + ry; py++) {
+            if(py < 0 || py >= this->height)
+                continue;
+
+            if(((px - cx)*(px - cx))/(rx*rx) + ((py - cy)*(py - cy))/(ry*ry) >= 1)
+                continue;
+            
+            this->setPixel(px, py, col);
+        }
+    }
+}
+
 void Canvas::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
     int sx = (int)p1.x;
     int sy = (int)p1.y;
