@@ -91,6 +91,15 @@ void Canvas::drawEllipse(const Vec2f& center, float rx, float ry, const RGB& col
         }
     }
 }
+void Canvas::drawEllipseOutline(const Vec2f& center, float rx, float ry, const RGB& col) {
+    for(float theta = 0; theta <= 2*M_PI; theta += 0.01) {
+        Vec2f p = center + Vec2f(rx*std::cos(theta), ry*std::sin(theta));
+        if(p.x < 0 || p.x >= this->width || p.y < 0 || p.y >= this->height)
+            continue;
+        
+        this->setPixel(p.x, p.y, col);
+    }
+}
 
 void Canvas::drawRect(const Vec2f& p1, const Vec2f& p2, const RGB& col) {
     int sx = (int)p1.x;

@@ -11,7 +11,7 @@ class Vec2 {
         Vec2(T x) :x(x), y(x) {};
         Vec2(T x, T y) : x(x), y(y) {};
 
-        T length() const {
+        auto length() const -> decltype(auto) {
             return std::sqrt(x*x + y*y);
         };
         T length2() const {
